@@ -23,6 +23,7 @@ class LocationList extends Component {
             <div className="content">
                 {this.state.locations.map(location => (
                     <Location 
+                        key={location.id}
                         name={location.name}
                         address={location.address}
                     />
