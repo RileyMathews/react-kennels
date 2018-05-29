@@ -3,18 +3,18 @@ import Location from "./Location"
 
 class LocationList extends Component {
     state = {
-        locations: [{
-            id: 0,
-            name: "Nashville North",
-            phone: "555-1212",
-            address: "10101 Binary Way"
-        },
-        {
-            id: 1,
-            name: "Nashville South",
-            phone: "555-1212",
-            address: "314 Pi Way"
-        }]
+        locations: []
+    }
+
+    componentDidMount() {
+        fetch("http://localhost:8088/locations")
+        .then(r => r.json())
+
+        .then(response => {
+            this.setState({
+                locations: response
+            })
+        })
     }
 
 
@@ -23,6 +23,7 @@ class LocationList extends Component {
             <div className="content">
                 {this.state.locations.map(location => (
                     <Location 
+                        locationId={location.id}
                         key={location.id}
                         name={location.name}
                         address={location.address}
